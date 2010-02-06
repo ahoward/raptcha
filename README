@@ -286,9 +286,9 @@ module Raptcha
         <div class="raptcha">
           #{ input_north }#{ input_west }
           #{ north } #{ west }
-          <input type="textarea" name="raptcha[t]" value="" class="raptcha_t"/>
-          <input type="hidden" name="raptcha[w]" value="#{ encrypted_word }" class="raptcha_w"/>
-          <input type="hidden" name="raptcha[b]" value="#{ encrypted_timebomb }" class="raptcha_b"/>
+          <input type="textarea" name="raptcha[t]" value="" class="raptcha-input"/>
+          <input type="hidden" name="raptcha[w]" value="#{ encrypted_word }" class="raptcha-word"/>
+          <input type="hidden" name="raptcha[b]" value="#{ encrypted_timebomb }" class="raptcha-timebomb"/>
           #{ east } #{ south }
           #{ input_east } #{ input_south }
         </div>
@@ -304,13 +304,13 @@ module Raptcha
       word = kw[:word] || Raptcha.word
       encrypted_word = encrypt word, :key => Image.key
       <<-html
-        <img src="#{ src }?e=#{ CGI.escape(encrypted_word) }" alt="raptcha.png" class="raptcha_i"/>
+        <img src="#{ src }?e=#{ CGI.escape(encrypted_word) }" alt="raptcha.png" class="raptcha-image"/>
       html
     end
 
     def inline(kw = {})
       <<-html
-        <img src="data:image/png;base64,#{ Image.inline kw  }" alt="raptcha.png" class="raptcha_i"/>
+        <img src="data:image/png;base64,#{ Image.inline kw  }" alt="raptcha.png" class="raptcha-image"/>
       html
     end
 
