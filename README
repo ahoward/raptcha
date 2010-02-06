@@ -25,6 +25,9 @@ module Raptcha
       solution in about 5 minutes that requires zero maintenance moving
       forward.
 
+      see a sample image here
+        http://github.com/ahoward/raptcha/blob/master/images/raptcha.png
+
     INSTALL
       1) SETUP DEPENDENCIES
           - Image Magick system library
