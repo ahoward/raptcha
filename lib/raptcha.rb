@@ -37,8 +37,8 @@ module Raptcha
       3) GENERATE THE CONROLLER
           ruby lib/raptcha.rb generate controller
 
-      4) PUT A RAPTCHA IMAGE IN YOUR VIEW
-          <%= Raptcha.image %>
+      4) PUT A RAPTCHA IMAGE AND FORM INPUT IN YOUR VIEW
+          <%= Raptcha.input %>
 
       5) REQUIRE VALID RAPTCHA INPUT IN A CONTROLLER ACTION
           class SessionsController < ApplicationController
