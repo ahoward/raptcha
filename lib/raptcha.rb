@@ -158,7 +158,7 @@ module Raptcha
         draw.stroke_width = 2 
         #draw.line 5, kw[:height]*0.33, kw[:width]-5, kw[:height]*0.33
         #draw.line 5, kw[:height]*0.66, kw[:width]-5, kw[:height]*0.66
-        draw.line 5, kw[:height]*0.65, kw[:width]-5, kw[:height]*0.65
+        draw.line 5, kw[:height]*0.55, kw[:width]-5, kw[:height]*0.55
 
         draw.draw img
 
@@ -482,15 +482,15 @@ end
               <html>
                 <body>
                   <hr>
-                  <em>valid</em>:#{ Raptcha.valid? params }
+                  <em>valid</em>:#{ Raptcha.valid?(params) ? :true : :false }
                   <hr>
-                  <form method=post>
+                  <% form_tag do %>
                     #{ Raptcha.input }
                     <hr>
                     <input type=submit name=submit value=submit />
                     <hr>
                     <a href="#{ request.request_uri }">new</a>
-                  </form>
+                  <% end %>
                 </body>
               </html>
             html
@@ -503,15 +503,15 @@ end
               <html>
                 <body>
                   <hr>
-                  <em>valid</em>:#{ Raptcha.valid? params }
+                  <em>valid</em>:#{ Raptcha.valid?(params) ? :true : :false }
                   <hr>
-                  <form method=post>
+                  <% form_tag do %>
                     #{ Raptcha.input :inline => true }
                     <hr>
                     <input type=submit name=submit value=submit />
                     <hr>
                     <a href="#{ request.request_uri }">new</a>
-                  </form>
+                  <% end %>
                 </body>
               </html>
             html
