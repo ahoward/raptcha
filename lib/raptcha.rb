@@ -159,8 +159,6 @@ module Raptcha
         # lines
         draw.stroke = kw[:foreground]
         draw.stroke_width = 2 
-        #draw.line 5, kw[:height]*0.33, kw[:width]-5, kw[:height]*0.33
-        #draw.line 5, kw[:height]*0.66, kw[:width]-5, kw[:height]*0.66
         draw.line 5, kw[:height]*0.55, kw[:width]-5, kw[:height]*0.55
 
         draw.draw img
@@ -169,6 +167,41 @@ module Raptcha
         img = img.implode kw[:implode] 
 
         img.to_blob
+      end
+
+      def create_without_rmagick kw = {}
+        kw = default.update kw.to_options
+
+        word = kw[:word]
+        encrypted = kw[:encrypted] || kw[:e]
+        word ||= Raptcha.decrypt(encrypted, :key => key) if encrypted
+        word ||= Raptcha.word
+        word = word.split(%r"").join(" ")
+
+        width = kw[:width].to_i
+        height = kw[:height].to_i
+        implode = kw[:implode].to_f
+
+        command = %W(
+          convert
+            -size '#{ width }x#{ height }'
+            -strokewidth 1
+            -gravity center
+            -fill '#ffa500'
+            -family 'monoco'
+            -pointsize 42
+            -bordercolor white
+            -border 5
+            -annotate "0x0" #{ word.inspect }
+            -wave '3x50'
+            -implode 0.2
+            -strokewidth 10
+            -draw 'line 5 25 295 25'
+            -draw 'line 5 35 295 35'
+            xc:white jpg:-
+        )
+        command = command.join(' ')
+        IO.popen(command){|pipe| pipe.read}
       end
 
       def inline kw ={}
