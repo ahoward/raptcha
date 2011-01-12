@@ -1,0 +1,68 @@
+    NAME
+      raptcha.rb
+
+    SYNOPSIS
+      super low drain bamage, K.I.S.S., storage-less, session-less,
+      plugin-less, dependency-less, zero admin, single-source-file secure
+      captcha system for ruby and/or rails.
+
+      bitchin.
+
+    DESCRIPTION
+      raptcha manages image generation via a streaming controller.  the result
+      is that *no* disk storage is ever needed for captcha images.  it also
+      manages authentication via openssl(aes-256) encoded hidden fields which
+      are relayed through the form submission process, obviating the need for
+      session/database interaction for captcha validation.  the library is
+      useful outside of rails, even from the command line.
+
+      what this means to you is that you can have a nice looking, and easy to
+      customize, safe captcha solution in about 1 minute that requires zero
+      maintenance moving forward.
+
+      see a sample image here
+        http://github.com/ahoward/raptcha/blob/master/images/raptcha.png
+
+    INSTALL
+      1) INSTALL Image Magick 
+          ~> which convert
+
+      2) COPY A SINGLE FILE INTO YOUR RAILS APP
+          ~> cp raptcha.rb ./app/lib/
+
+      3) GENERATE THE CONROLLER
+          ruby lib/raptcha.rb generate controller
+
+      4) ADD A ROUTE
+          match 'raptcha(/:action)', :controller => 'raptcha'
+
+      5) PUT A RAPTCHA IMAGE AND FORM INPUT IN YOUR VIEW
+          <%= Raptcha.input %>
+
+      6) REQUIRE VALID RAPTCHA INPUT IN A CONTROLLER ACTION
+          class SessionsController < ApplicationController
+            def create 
+              unless Raptcha.valid?(params)
+                # ...
+              end
+            end
+          end
+
+      7) TRY THE EXAMPLES LOCALLY AT
+          http://0.0.0.0:3000/raptcha/form
+          http://0.0.0.0:3000/raptcha/inline
+
+    URIS
+      http://github.com/ahoward/raptcha
+      http://codforpeople.com
+
+
+    COMMAND LINE USAGE
+      * make an image by hand
+        ~> ruby lib/raptcha.rb image foreground:pink raptcha.png && open raptcha.png
+
+      * generate the controller
+        ~> ruby lib/rapcha.rb generate controller
+
+    DOC
+      less lib/raptcha.rb
