@@ -97,7 +97,7 @@ module Raptcha
       def for(word)
         command = %W(
           convert
-            -size '242x42'
+            -size '222x42'
             -strokewidth 1
             -gravity center
             -fill '#333'
